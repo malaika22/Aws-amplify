@@ -3,7 +3,9 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { ChangeEventHandler, useState } from "react";
+import Auth, { CognitoHostedUIIdentityProvider } from "@aws-amplify/auth";
 import FormLayout from "../components/FormLayout";
+import { FcGoogle } from "react-icons/fc";
 import TextField from "../components/TextField";
 
 const Home: NextPage = () => {
@@ -37,6 +39,26 @@ const Home: NextPage = () => {
             onChange={formChange}
             toggleVisibility
           />
+        </div>
+        <div>
+          <button
+            onClick={() =>
+              Auth.federatedSignIn({
+                provider: CognitoHostedUIIdentityProvider.Facebook,
+              })
+            }
+          >
+            Open Facebook
+          </button>
+          <button
+            onClick={() =>
+              Auth.federatedSignIn({
+                provider: CognitoHostedUIIdentityProvider.Google,
+              })
+            }
+          >
+            Open Google
+          </button>
         </div>
       </FormLayout>
     </div>

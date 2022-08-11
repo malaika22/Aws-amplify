@@ -29,6 +29,16 @@ function MyApp({ Component, pageProps }: AppProps) {
       }
     });
 
+    (async () => {
+      try {
+        const currentUser = await Auth.currentAuthenticatedUser();
+
+        setUser(currentUser);
+      } catch (error) {
+        setUser(null);
+      }
+    })();
+
     return () => {
       Hub.remove("auth", () => {});
     };
